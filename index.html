@@ -227,7 +227,86 @@ footer .wrap { padding-block: 32px; display: flex; justify-content: space-betwee
 footer .lockup { font-size: 1.2rem; color: #fff; }
 footer .lockup svg { color: #fff; }
 
-.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 9px 16px; border-radius: 999px; font: 500 0.84rem var(--sans); z-index: 20; }
+
+/* Category tabs */
+.tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 4px; -webkit-overflow-scrolling: touch; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; font: 500 0.9rem var(--sans); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+.tab:hover { border-color: var(--accent-text); }
+.tab[aria-selected="true"] { background: var(--neel); border-color: var(--neel); color: #fff; }
+.tab .ct { font: 500 0.7rem var(--mono); min-width: 20px; height: 20px; border-radius: 999px; display: inline-grid; place-items: center; padding: 0 6px; background: var(--mist); color: var(--neel); }
+.tab[aria-selected="true"] .ct { background: rgba(255,255,255,0.22); color: #fff; }
+.list-col { display: grid; gap: 14px; min-width: 0; }
+
+/* Sticky header */
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 15; backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid transparent; transition: border-color .2s ease, background .2s ease; }
+header.top.scrolled { border-bottom-color: var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 16; background: var(--hero-bg); }
+
+/* Mobile order bar */
+.mbar { display: none; }
+
+@media (max-width: 860px) {
+  .summary { position: static; }
+  .mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 14; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -12px 32px -20px rgba(11,18,32,0.35); transition: transform .25s ease; }
+  .mbar.away { transform: translateY(110%); }
+  .mbar .t { display: grid; line-height: 1.2; }
+  .mbar .t span { font-size: 0.75rem; color: var(--muted); }
+  .mbar .t b { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .mbar .btn { padding: 12px 18px; }
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (max-width: 640px) {
+  header.top .wrap { padding-block: 12px; flex-wrap: nowrap; }
+  header.top .lockup { font-size: 1.2rem; }
+  nav a:not(.btn) { display: none; }
+  nav .btn { padding: 8px 14px; font-size: 0.85rem; }
+
+  .hero .wrap { padding-block: 20px 48px; gap: 28px; }
+  .hero h1 { font-size: clamp(2.6rem, 12.5vw, 3.4rem); margin-top: 18px; }
+  .hero .sub { font-size: 1.02rem; margin-top: 16px; }
+  .ctas { margin-top: 24px; }
+  .ctas .btn { flex: 1 1 auto; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 28px; }
+  .facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+  .facts b { font-size: 1.15rem; }
+  .facts span { font-size: 0.74rem; line-height: 1.3; }
+  .port { width: min(78%, 300px); }
+  .port .card { padding: 9px 11px; font-size: 0.78rem; border-radius: 12px; }
+  .port .c1 { left: -12%; bottom: 4%; }
+  .port .c2 { right: -10%; top: 4%; }
+
+  .aud .wrap { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; font-size: 0.86rem; }
+  .aud .wrap::-webkit-scrollbar { display: none; }
+  .aud span { flex: none; }
+
+  section { padding-block: 56px; }
+  section .wrap { gap: 28px; }
+  h2 { font-size: clamp(1.75rem, 8.4vw, 2.2rem); }
+
+  .services, .plans { display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 80%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px)); padding-bottom: 6px; }
+  .services::-webkit-scrollbar, .plans::-webkit-scrollbar { display: none; }
+  .services > *, .plans > * { scroll-snap-align: start; }
+  .plans { grid-auto-columns: 84%; }
+
+  .row { padding: 12px 16px; gap: 10px; }
+  .row .nm b { font-size: 0.95rem; }
+  .qty button { width: 36px; height: 36px; }
+  .qty output { width: 26px; }
+  .summary { padding: 20px; }
+
+  .med .wrap { gap: 28px; }
+  .info { padding: 22px; }
+  .cta .wrap { padding-block: 48px; }
+  .cta .btn { width: 100%; }
+  footer .wrap { flex-direction: column; align-items: flex-start; }
+}
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 9px 16px; border-radius: 999px; font: 500 0.84rem var(--sans); z-index: 20; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 </head>
@@ -340,8 +419,8 @@ footer .lockup svg { color: #fff; }
         <p class="muted">Pick what you're sending and we'll write the WhatsApp message for you. Pay by UPI or cash on delivery.</p>
       </div>
       <div class="builder">
-        <div class="price-list" id="list"></div>
-        <aside class="summary" aria-live="polite">
+        <div class="list-col"><div class="tabs" id="tabs" role="tablist" aria-label="Clothing categories"></div><div class="price-list" id="list"></div></div>
+        <aside class="summary" id="summary" aria-live="polite">
           <div class="total"><span class="label">Estimated total</span><b id="total">₹0</b></div>
           <p class="empty" id="empty">Add items from the list to build your order.</p>
           <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" placeholder="Name" autocomplete="name"></div>
@@ -476,6 +555,7 @@ footer .lockup svg { color: #fff; }
     <span>Bihaguri, Tezpur · kaapurcare.com · © 2026 Kaapur Care</span>
   </div>
 </footer>
+<div class="mbar" id="mbar"><div class="t"><span id="mbar-l">Book a pickup</span><b id="mbar-t">Free pickup</b></div><a class="btn btn-primary" id="mbar-go" href="#prices"><svg aria-hidden="true"><use href="#i-wa"/></svg><span id="mbar-btn">Start order</span></a></div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
@@ -527,8 +607,7 @@ footer .lockup svg { color: #fff; }
   var html = "", lastG = "";
   ITEMS.forEach(function (it) {
     qty[it.id] = 0;
-    if (it.g !== lastG) { html += '<div class="price-group">' + it.g + '</div>'; lastG = it.g; }
-    html += '<div class="row"><div class="nm"><b>' + it.name + '</b><span>' + it.note + '</span></div>' +
+    html += '<div class="row" data-g="' + it.g + '"><div class="nm"><b>' + it.name + '</b><span>' + it.note + '</span></div>' +
       '<span class="pr">₹' + it.price + '</span>' +
       '<span class="qty"><button type="button" id="m-' + it.id + '" aria-label="Remove one ' + it.name + '">−</button>' +
       '<output id="q-' + it.id + '">0</output>' +
@@ -558,6 +637,8 @@ footer .lockup svg { color: #fff; }
       (lines.length ? lines.join("\n") : "(items)") + "\nEstimated total: " + inr(total) + "\nPickup: " + whereEl.value + (addrEl.value.trim() ? "\nAddress: " + addrEl.value.trim() : "");
     msgEl.textContent = text;
     send.href = waHref(text);
+    if (typeof updateCounts === "function") updateCounts();
+    if (typeof updateBar === "function") updateBar(total, text);
     return text;
   }
 
@@ -572,8 +653,45 @@ footer .lockup svg { color: #fff; }
   whereEl.addEventListener("change", build);
   addrEl.addEventListener("input", build);
 
-  // Sample order so the builder shows what it does on first view.
-  qty.scrub = 2; qty.coat = 1; qty.kgi = 3;
+  // Category tabs
+  var groups = []; ITEMS.forEach(function (it) { if (groups.indexOf(it.g) < 0) groups.push(it.g); });
+  var tabsEl = document.getElementById("tabs"), current = groups[0];
+  tabsEl.innerHTML = groups.map(function (g, i) {
+    return '<button class="tab" type="button" role="tab" id="tab-' + i + '" data-g="' + g + '" aria-selected="' + (i === 0) + '">' + g + '<span class="ct" hidden>0</span></button>';
+  }).join("");
+  function showGroup(g) {
+    current = g;
+    tabsEl.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-g") === g); });
+    list.querySelectorAll(".row").forEach(function (r) { r.hidden = r.getAttribute("data-g") !== g; });
+  }
+  tabsEl.addEventListener("click", function (e) { var t = e.target.closest(".tab"); if (t) showGroup(t.getAttribute("data-g")); });
+  function updateCounts() {
+    groups.forEach(function (g, i) {
+      var n = 0; ITEMS.forEach(function (it) { if (it.g === g && qty[it.id] > 0) n += 1; });
+      var ct = document.querySelector("#tab-" + i + " .ct"); ct.textContent = n; ct.hidden = n === 0;
+    });
+  }
+  showGroup(current);
+
+  // Mobile order bar
+  var mbar = document.getElementById("mbar"), mbarT = document.getElementById("mbar-t"), mbarL = document.getElementById("mbar-l"),
+      mbarGo = document.getElementById("mbar-go"), mbarBtn = document.getElementById("mbar-btn");
+  function updateBar(total, text) {
+    if (total > 0) { mbarL.textContent = "Estimated total"; mbarT.textContent = inr(total); mbarBtn.textContent = "Send order"; mbarGo.href = waHref(text); mbarGo.target = "_blank"; mbarGo.rel = "noopener"; }
+    else { mbarL.textContent = "Free pickup and drop"; mbarT.textContent = "From ₹59/kg"; mbarBtn.textContent = "Book a pickup"; mbarGo.href = waHref("Namaskar Kaapur Care! I'd like to book a pickup."); mbarGo.target = "_blank"; mbarGo.rel = "noopener"; }
+  }
+  if ("IntersectionObserver" in window) {
+    var hideOn = [document.getElementById("summary"), document.querySelector(".hero .ctas"), document.querySelector(".cta")];
+    var vis = new Set();
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) vis.add(e.target); else vis.delete(e.target); });
+      mbar.classList.toggle("away", vis.size > 0);
+    });
+    hideOn.forEach(function (el) { if (el) io.observe(el); });
+  }
+  var hdr = document.querySelector("header.top");
+  window.addEventListener("scroll", function () { hdr.classList.toggle("scrolled", window.scrollY > 8); }, { passive: true });
+
   build();
 
   document.querySelectorAll(".wa-link").forEach(function (a) { a.href = waHref("Namaskar Kaapur Care! I'd like to book a pickup."); });
