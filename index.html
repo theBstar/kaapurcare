@@ -191,6 +191,57 @@ section .wrap { display: grid; gap: 36px; }
 .msg { font-family: var(--mono); font-size: 0.78rem; background: var(--tint); border-radius: 10px; padding: 12px; white-space: pre-wrap; color: var(--muted); max-height: 180px; overflow: auto; }
 .summary .btn { width: 100%; }
 .summary small { font-size: 0.78rem; color: var(--muted); }
+
+/* Search */
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.search { position: relative; display: flex; align-items: center; }
+.search svg { position: absolute; left: 14px; width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
+.search input { width: 100%; font: 400 0.98rem var(--sans); color: var(--fg); background: var(--tint); border: 1px solid var(--line); border-radius: 999px; padding: 12px 40px 12px 42px; }
+.search input::-webkit-search-cancel-button { display: none; }
+.search input:focus { border-color: var(--accent-text); outline: none; box-shadow: 0 0 0 3px rgba(237,190,98,0.25); }
+.sclear { position: absolute; right: 8px; width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; color: var(--muted); font-size: 1.2rem; cursor: pointer; }
+.sclear:hover { background: var(--surface); color: var(--fg); }
+.tabs.dim .tab[aria-selected="true"] { background: var(--surface); color: var(--fg); border-color: var(--line); }
+.nomatch { font-size: 0.9rem; color: var(--muted); padding: 6px 4px; }
+.row .grp { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-text); display: block; margin-top: 2px; }
+.row .grp[hidden] { display: none; }
+
+/* Order steps */
+.steps-col { display: grid; gap: 16px; min-width: 0; }
+.ostep { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; display: grid; gap: 16px; min-width: 0; }
+.steps-col .ostep .list-col .price-list { border-radius: 14px; }
+.sh { display: flex; align-items: flex-start; gap: 14px; }
+.sn { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--neel); color: var(--muga); display: grid; place-items: center; font: 600 1rem var(--serif); }
+.ostep.done .sn { background: var(--muga); color: var(--neel); }
+.st { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.st h3 { font-family: var(--serif); font-size: 1.25rem; }
+.st p { font-size: 0.9rem; color: var(--muted); }
+.pill { flex: none; font: 500 0.72rem var(--mono); letter-spacing: 0.04em; padding: 5px 10px; border-radius: 999px; background: var(--tint); color: var(--muted); white-space: nowrap; }
+.ostep.done .pill { background: var(--neel); color: var(--muga); }
+.fgrid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.fgrid .wide { grid-column: 1 / -1; }
+@media (max-width: 520px) {
+  .fgrid { grid-template-columns: 1fr; }
+  .ostep { padding: 16px; gap: 14px; }
+  .sh { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 4px 12px; }
+  .sh .pill { grid-column: 2; justify-self: start; }
+  .st h3 { font-size: 1.15rem; }
+  .steps-col .row { padding: 12px 14px; }
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.qchip { font: 500 0.86rem var(--sans); color: var(--fg); background: var(--tint); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.qchip:hover { border-color: var(--accent-text); }
+.qchip[aria-pressed="true"] { background: var(--neel); color: var(--muga-light); border-color: var(--neel); }
+.review { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.review li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 0.92rem; }
+.review li span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rv-meta { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 0.88rem; }
+.rv-meta dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.rv-meta dd { margin: 0; overflow-wrap: anywhere; }
+.rv-meta .missing { color: #B3261E; }
+.msgbox { background: transparent; border: 0; padding: 0; border-radius: 0; }
+.msgbox summary { padding: 4px 0; font-size: 0.86rem; color: var(--accent-text); font-weight: 500; }
+.msgbox .msg { margin: 8px 0; }
 .empty { font-size: 0.9rem; color: var(--muted); }
 
 /* Plans */
@@ -202,6 +253,17 @@ section .wrap { display: grid; gap: 36px; }
 .plan.hl .muted, .plan.hl li { color: var(--on-neel); }
 .plan .price { font-family: var(--serif); font-size: 2.5rem; font-weight: 600; line-height: 1; }
 .plan .price small { font-size: 0.95rem; font-weight: 400; letter-spacing: 0; opacity: 0.7; }
+.plan .was { font-size: 0.84rem; color: var(--muted); margin-top: -6px; }
+.plan .was b { color: var(--accent-text); font-weight: 600; }
+.plan.hl .was { color: var(--on-neel-2); }
+.plan.hl .was b { color: var(--muga); }
+.plan .amount { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--tint); }
+.plan .amount b { font: 600 1.35rem var(--serif); }
+.plan .amount span { font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
+.plan.hl .amount { background: rgba(243,228,194,0.08); }
+.plan.hl .amount b { color: var(--muga-light); }
+.plan.hl .amount span { color: var(--on-neel); }
+.plan-note { font-size: 0.86rem; color: var(--muted); max-width: 80ch; }
 .plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 0.94rem; }
 .plan li { display: flex; gap: 10px; }
 .plan li::before { content: ""; width: 16px; height: 16px; margin-top: 4px; flex: none; border-radius: 50%; background: currentColor; opacity: 0.18; }
@@ -438,28 +500,60 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     <div class="wrap">
       <div class="head">
         <span class="label">Prices</span>
-        <h2>Add your clothes. Send the order.</h2>
-        <p class="muted">Pick what you're sending and we'll write the WhatsApp message for you. Pay by UPI or cash on delivery.</p>
+        <h2>Order in four easy steps.</h2>
+        <p class="muted">Add your clothes, tell us where to pick up, add any special request, then check the price and send. Pay by UPI or cash on delivery.</p>
       </div>
       <div class="builder">
-        <div class="list-col"><div class="tabs" id="tabs" role="tablist" aria-label="Clothing categories"></div><div class="price-list" id="list"></div></div>
-        <aside class="summary" id="summary" aria-live="polite">
-          <div class="total"><span class="label">Estimated total</span><b id="total">₹0</b></div>
-          <p class="empty" id="empty">Add items from the list to build your order.</p>
-          <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" placeholder="Name" autocomplete="name"></div>
-          <div class="field"><label for="f-where">Pickup from</label>
-            <select id="f-where">
-              <option>I'll drop it at the shop</option>
-              <option>TMCH boys' hostel gate</option>
-              <option>TMCH girls' hostel gate</option>
-              <option>TMCH hospital gate</option>
-              <option>My home in Tezpur</option>
-            </select>
+        <div class="steps-col">
+          <div class="ostep" id="step1">
+            <div class="sh"><span class="sn">1</span><div class="st"><h3>Add your clothes</h3><p>Pick a category, then tap + for each item.</p></div><span class="pill" id="s1pill">0 items</span></div>
+            <div class="list-col">
+              <div class="search"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><label for="f-search" class="vh">Search clothes</label><input id="f-search" type="search" placeholder="Search any item: saree, jeans, blanket…" autocomplete="off"><button type="button" id="search-clear" class="sclear" aria-label="Clear search" hidden>×</button></div>
+              <div class="tabs" id="tabs" role="tablist" aria-label="Clothing categories"></div>
+              <p class="nomatch" id="nomatch" hidden>No item matches that. Try another word, or add it in step 3 as a special request.</p>
+              <div class="price-list" id="list"></div>
+            </div>
           </div>
-          <div class="field"><label for="f-addr">Address or room number</label><textarea id="f-addr" rows="2" placeholder="Room 214, boys' hostel, or house, lane and landmark" autocomplete="street-address"></textarea></div>
-          <div class="msg" id="msg" aria-label="Message preview"></div>
-          <a class="btn btn-primary" id="send" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</a>
-          <button class="copy" id="copy-msg" type="button">Copy message</button>
+
+          <div class="ostep" id="step2">
+            <div class="sh"><span class="sn">2</span><div class="st"><h3>Add your address</h3><p>Where should we collect the clothes from?</p></div><span class="pill" id="s2pill">To do</span></div>
+            <div class="fgrid">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" placeholder="Name" autocomplete="name"></div>
+              <div class="field"><label for="f-where">Pickup from</label>
+                <select id="f-where">
+                  <option>I'll drop it at the shop</option>
+                  <option>TMCH boys' hostel gate</option>
+                  <option>TMCH girls' hostel gate</option>
+                  <option>TMCH hospital gate</option>
+                  <option>Enter address manually</option>
+                </select>
+              </div>
+              <div class="field wide" id="addr-wrap" hidden><label for="f-addr">Your address</label><textarea id="f-addr" rows="2" placeholder="House, lane, area and a landmark in Tezpur" autocomplete="street-address"></textarea></div>
+            </div>
+          </div>
+
+          <div class="ostep" id="step3">
+            <div class="sh"><span class="sn">3</span><div class="st"><h3>Any special request?</h3><p>Optional. Tap a common one or write your own.</p></div><span class="pill" id="s3pill">Optional</span></div>
+            <div class="chips" id="chips">
+              <button type="button" class="qchip" data-t="Please remove a stain (I'll show you where)">Stain to remove</button>
+              <button type="button" class="qchip" data-t="Light starch on shirts">Light starch</button>
+              <button type="button" class="qchip" data-t="Hang shirts, don't fold">Hang, don't fold</button>
+              <button type="button" class="qchip" data-t="No fragrance, please">No fragrance</button>
+              <button type="button" class="qchip" data-t="Urgent: need it back sooner">Urgent</button>
+              <button type="button" class="qchip" data-t="Delicate silk, handle with care">Delicate silk</button>
+            </div>
+            <div class="field"><label for="f-note">Your request</label><textarea id="f-note" rows="2" placeholder="For example: the blue kurta has a curry stain on the sleeve"></textarea></div>
+          </div>
+        </div>
+
+        <aside class="summary ostep" id="summary" aria-live="polite">
+          <div class="sh"><span class="sn">4</span><div class="st"><h3>Review and send</h3><p>Check everything, then send it to us on WhatsApp.</p></div></div>
+          <ul class="review" id="review"></ul>
+          <p class="empty" id="empty">No clothes added yet. Start with step 1.</p>
+          <div class="total"><span class="label">Estimated total</span><b id="total">₹0</b></div>
+          <dl class="rv-meta" id="rv-meta"></dl>
+          <a class="btn btn-primary" id="send" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Send order on WhatsApp</a>
+          <details class="msgbox"><summary>See the WhatsApp message</summary><div class="msg" id="msg" aria-label="Message preview"></div><button class="copy" id="copy-msg" type="button">Copy message</button></details>
           <small>Final price is confirmed at pickup. Stains and special fabrics may cost more.</small>
         </aside>
       </div>
@@ -471,26 +565,33 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       <div class="head">
         <span class="label">Plans</span>
         <h2>Never think about laundry again.</h2>
-        <p class="muted">Monthly plans for hostel students and hospital staff. Pay once, send clothes all month.</p>
+        <p class="muted">Monthly plans for hostel students and hospital staff. Pay once, send clothes all month, and save 20% on what the same laundry costs order by order.</p>
       </div>
       <div class="plans">
         <div class="plan">
           <h3>Hostel Basic</h3>
-          <div class="price">₹699<small> / month</small></div>
-          <ul><li>Up to 8 kg washed and steam ironed</li><li>Pickup from your hostel gate once a week</li><li>Ready in 48 hours</li></ul>
+          <div class="price">₹629<small> / month</small></div>
+          <div class="was"><s>₹792</s> if paid per order · <b>save ₹163</b></div>
+          <div class="amount"><b>8 kg</b><span>About 32 shirts or kurtas a month, roughly 8 a week</span></div>
+          <ul><li>Washed and steam ironed</li><li>Pickup from your hostel gate once a week</li><li>Ready in 48 hours</li></ul>
         </div>
         <div class="plan hl">
           <span class="tag">Most picked</span>
           <h3>Hostel Plus</h3>
-          <div class="price">₹1,199<small> / month</small></div>
-          <ul><li>Up to 14 kg washed and steam ironed</li><li>Pickup twice a week</li><li>Uniforms and white coats in 24 hours</li><li>One bedsheet free every month</li></ul>
+          <div class="price">₹1,099<small> / month</small></div>
+          <div class="was"><s>₹1,386</s> if paid per order · <b>save ₹287</b></div>
+          <div class="amount"><b>14 kg</b><span>About 56 shirts or kurtas a month, roughly 14 a week</span></div>
+          <ul><li>Washed and steam ironed</li><li>Pickup twice a week</li><li>Bedsheets and towels count towards your kg</li></ul>
         </div>
         <div class="plan">
           <h3>Duty Express</h3>
-          <div class="price">₹1,499<small> / month</small></div>
-          <ul><li>Up to 15 uniform sets or white coats</li><li>Drop after any shift, back next morning</li><li>For doctors, nurses and interns</li></ul>
+          <div class="price">₹1,029<small> / month</small></div>
+          <div class="was"><s>₹1,290</s> if paid per order · <b>save ₹261</b></div>
+          <div class="amount"><b>6 kg</b><span>About 10 uniform sets or 15 white coats a month</span></div>
+          <ul><li>Separate hot wash for duty wear</li><li>Drop after any shift, back next morning</li><li>For doctors, nurses and interns</li></ul>
         </div>
       </div>
+      <p class="plan-note">As a guide, 1 kg is about 4 shirts or kurtas, 3 trousers, or 1 double bedsheet. Prices are 20% below our per-order rates: ₹99 per kg washed and ironed, and ₹129 per uniform set.</p>
     </div>
   </section>
 
@@ -629,7 +730,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   var html = "", lastG = "";
   ITEMS.forEach(function (it) {
     qty[it.id] = 0;
-    html += '<div class="row" data-g="' + it.g + '"><div class="nm"><b>' + it.name + '</b><span>' + it.note + '</span></div>' +
+    var syn = { scrub: "scrubs uniform nurse doctor", coat: "apron labcoat lab coat doctor", shirt: "tshirt tee", pant: "pant pants jeans", kurta: "kurti", jumper: "sweater woollen", sheet1: "bed sheet chadar", sheet2: "bed sheet chadar", blank1: "kambal razai", blank2: "kambal razai", quilt: "razai comforter", plain: "mekhla", pat: "mekhla silk", muga: "mekhla silk", suitl: "salwar churidar", kgf: "bulk weight", kgi: "bulk weight iron", shoek: "sneakers", shoea: "sneakers" }[it.id] || "";
+    var key = (it.name + " " + it.note + " " + it.g + " " + syn).toLowerCase().replace(/[^a-z0-9 ]/g, " ");
+    html += '<div class="row" data-g="' + it.g + '" data-k="' + key + '"><div class="nm"><b>' + it.name + '<span class="grp" hidden>' + it.g + '</span></b><span>' + it.note + '</span></div>' +
       '<span class="pr">₹' + it.price + '</span>' +
       '<span class="qty"><button type="button" id="m-' + it.id + '" aria-label="Remove one ' + it.name + '">−</button>' +
       '<output id="q-' + it.id + '">0</output>' +
@@ -640,23 +743,39 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   var totalEl = document.getElementById("total"), msgEl = document.getElementById("msg"),
       emptyEl = document.getElementById("empty"), send = document.getElementById("send"),
       nameEl = document.getElementById("f-name"), whereEl = document.getElementById("f-where"),
-      addrEl = document.getElementById("f-addr");
+      addrEl = document.getElementById("f-addr"), noteEl = document.getElementById("f-note"),
+      reviewEl = document.getElementById("review"), metaEl = document.getElementById("rv-meta");
+  function esc(t) { return t.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function setStep(id, done, label) { var s = document.getElementById(id); s.classList.toggle("done", done); s.querySelector(".pill").textContent = label; }
 
   function waHref(text) { return "https://wa.me/" + WA_NUMBER + (text ? "?text=" + encodeURIComponent(text) : ""); }
   function inr(n) { return "₹" + n.toLocaleString("en-IN"); }
 
   function build() {
-    var lines = [], total = 0;
+    var lines = [], total = 0, rows = [], count = 0;
     ITEMS.forEach(function (it) {
       var q = qty[it.id];
       document.getElementById("q-" + it.id).textContent = q;
-      if (q > 0) { lines.push("• " + it.name + " × " + q + (it.unit || "") + "  " + inr(q * it.price)); total += q * it.price; }
+      if (q > 0) {
+        lines.push("• " + it.name + " × " + q + (it.unit || "") + "  " + inr(q * it.price)); total += q * it.price; count += 1;
+        rows.push('<li><span>' + esc(it.name) + ' × ' + q + (it.unit || "") + '</span><span>' + inr(q * it.price) + '</span></li>');
+      }
     });
     totalEl.textContent = inr(total);
+    reviewEl.innerHTML = rows.join("");
     emptyEl.hidden = lines.length > 0;
-    var name = nameEl.value.trim();
+    var name = nameEl.value.trim(), addr = addrEl.value.trim(), note = noteEl.value.trim();
+    var idx = whereEl.selectedIndex, atShop = idx === 0, manual = idx === whereEl.options.length - 1;
+    document.getElementById("addr-wrap").hidden = !manual;
+    var pickup = manual ? (addr || "") : whereEl.value;
+    setStep("step1", count > 0, count === 0 ? "0 items" : count + (count === 1 ? " item" : " items"));
+    setStep("step2", !manual || addr.length > 0, atShop ? "At the shop" : (manual ? (addr ? "Done" : "To do") : "Gate pickup"));
+    setStep("step3", note.length > 0, note ? "Added" : "Optional");
+    metaEl.innerHTML = '<dt>Name</dt><dd>' + (name ? esc(name) : '<span class="missing">Add in step 2</span>') + '</dd>' +
+      '<dt>Pickup</dt><dd>' + (pickup ? esc(pickup) : '<span class="missing">Type your address in step 2</span>') + '</dd>' +
+      (note ? '<dt>Request</dt><dd>' + esc(note) + '</dd>' : '');
     var text = "Namaskar Kaapur Care! " + (name ? "I'm " + name + ". " : "") + "I'd like to send:\n" +
-      (lines.length ? lines.join("\n") : "(items)") + "\nEstimated total: " + inr(total) + "\nPickup: " + whereEl.value + (addrEl.value.trim() ? "\nAddress: " + addrEl.value.trim() : "");
+      (lines.length ? lines.join("\n") : "(items)") + "\nEstimated total: " + inr(total) + "\nPickup: " + (manual ? (addr || "(address)") : whereEl.value) + (note ? "\nRequest: " + note : "");
     msgEl.textContent = text;
     send.href = waHref(text);
     if (typeof updateCounts === "function") updateCounts();
@@ -674,6 +793,22 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   nameEl.addEventListener("input", build);
   whereEl.addEventListener("change", build);
   addrEl.addEventListener("input", build);
+  noteEl.addEventListener("input", function () {
+    document.querySelectorAll(".qchip").forEach(function (c) { c.setAttribute("aria-pressed", noteEl.value.indexOf(c.getAttribute("data-t")) >= 0); });
+    build();
+  });
+  document.getElementById("chips").addEventListener("click", function (e) {
+    var c = e.target.closest(".qchip"); if (!c) return;
+    var t = c.getAttribute("data-t"), v = noteEl.value;
+    if (v.indexOf(t) >= 0) {
+      noteEl.value = v.split(/\.\s*/).filter(function (x) { return x && x !== t; }).join(". ");
+      c.setAttribute("aria-pressed", "false");
+    } else {
+      noteEl.value = v.trim() ? v.trim().replace(/\.?$/, ". ") + t : t;
+      c.setAttribute("aria-pressed", "true");
+    }
+    build();
+  });
 
   // Category tabs
   var groups = []; ITEMS.forEach(function (it) { if (groups.indexOf(it.g) < 0) groups.push(it.g); });
@@ -681,8 +816,24 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   tabsEl.innerHTML = groups.map(function (g, i) {
     return '<button class="tab" type="button" role="tab" id="tab-' + i + '" data-g="' + g + '" aria-selected="' + (i === 0) + '">' + g + '<span class="ct" hidden>0</span></button>';
   }).join("");
+  var searchEl = document.getElementById("f-search"), clearEl = document.getElementById("search-clear"), noMatch = document.getElementById("nomatch");
+  function runSearch() {
+    var q = searchEl.value.toLowerCase().replace(/[^a-z0-9 ]/g, " ").trim();
+    clearEl.hidden = !q;
+    tabsEl.classList.toggle("dim", !!q);
+    if (!q) { list.querySelectorAll(".grp").forEach(function (x) { x.hidden = true; }); noMatch.hidden = true; showGroup(current); return; }
+    var words = q.split(/\s+/), n = 0;
+    list.querySelectorAll(".row").forEach(function (r) {
+      var k = r.getAttribute("data-k"), hit = words.every(function (w) { return k.indexOf(w) >= 0; });
+      r.hidden = !hit; r.querySelector(".grp").hidden = !hit; if (hit) n += 1;
+    });
+    noMatch.hidden = n > 0;
+  }
+  searchEl.addEventListener("input", runSearch);
+  clearEl.addEventListener("click", function () { searchEl.value = ""; runSearch(); searchEl.focus(); });
   function showGroup(g) {
     current = g;
+    if (searchEl.value) { searchEl.value = ""; clearEl.hidden = true; tabsEl.classList.remove("dim"); noMatch.hidden = true; list.querySelectorAll(".grp").forEach(function (x) { x.hidden = true; }); }
     tabsEl.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-g") === g); });
     list.querySelectorAll(".row").forEach(function (r) { r.hidden = r.getAttribute("data-g") !== g; });
   }
